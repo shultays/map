@@ -1,0 +1,32 @@
+uniform vec3 playerPos;
+out vec4 fragColor;
+varying vec3 pixelPos;
+
+varying vec3 normal, lightDir, halfVector;
+
+
+uniform float clampDist;
+
+void main(void)
+{
+
+    fragColor = gl_Color;
+
+   vec3  dl = gl_LightSource[0].diffuse .rgb /** gl_FrontMaterial.diffuse.rgb */;
+   vec3  al = gl_LightSource[0].ambient .rgb /** gl_FrontMaterial.ambient.rgb +
+                                               gl_FrontMaterial.emission.rgb*/ ;
+   vec3  sl = gl_LightSource[0].specular.rgb /** gl_FrontMaterial.specular.rgb*/ ;
+
+   
+   float sh = gl_FrontMaterial.shininess ;
+   vec3 n = normalize ( normal ) ;
+   fragColor.xyz = fragColor.xyz * ( dl * max ( dot ( n, lightDir), 0.0 ) + al ) ;
+	
+	
+	if(clampDist>0.5){
+	float d = distance(pixelPos/20000, playerPos);
+	d = clamp(1-(d-200)/10, 0.0f, 1.0f);
+	//fragColor.a = d;
+	//fragColor.r = 1.0;
+	}
+}

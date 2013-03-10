@@ -1,0 +1,51 @@
+# Project: Project1
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = 
+OBJ  = Foo.o Game.o Array2D.o Perlin.o Tools.o mapGenerator.o mapLoader.o Model.o $(RES)
+LINKOBJ  = Foo.o Game.o Array2D.o Perlin.o Tools.o mapGenerator.o mapLoader.o Model.o $(RES)
+LIBS =  -L"C:/MinGW/lib" -mwindows -lglu32 -lglaux -lopengl32  -g3 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = testo.exe
+CXXFLAGS = $(CXXINCS)   -g3
+CFLAGS = $(INCS)   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before testo.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "testo.exe" $(LIBS)
+
+Foo.o: Foo.cpp
+	$(CPP) -c Foo.cpp -o Foo.o $(CXXFLAGS)
+
+Game.o: Game.cpp
+	$(CPP) -c Game.cpp -o Game.o $(CXXFLAGS)
+
+Array2D.o: Array2D.cpp
+	$(CPP) -c Array2D.cpp -o Array2D.o $(CXXFLAGS)
+
+Perlin.o: Perlin.cpp
+	$(CPP) -c Perlin.cpp -o Perlin.o $(CXXFLAGS)
+
+Tools.o: Tools.cpp
+	$(CPP) -c Tools.cpp -o Tools.o $(CXXFLAGS)
+
+mapGenerator.o: mapGenerator.cpp
+	$(CPP) -c mapGenerator.cpp -o mapGenerator.o $(CXXFLAGS)
+
+mapLoader.o: mapLoader.cpp
+	$(CPP) -c mapLoader.cpp -o mapLoader.o $(CXXFLAGS)
+
+Model.o: Model.cpp
+	$(CPP) -c Model.cpp -o Model.o $(CXXFLAGS)
